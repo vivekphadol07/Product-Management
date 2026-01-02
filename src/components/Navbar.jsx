@@ -1,56 +1,69 @@
-import React from "react";
-import { FaShoppingCart, FaSearch } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { FaPlus, FaSearch, FaList, FaThLarge } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-export const Navbar = ({ setSearchQuery }) => {
-  const cartItems = useSelector((state) => state.cart);
-  const navigate = useNavigate();
+const Navbar = ({ view, setView, search, setSearch }) => {
+    const navigate = useNavigate();
 
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-    navigate("/"); // go to home when searching
-  };
+    return (
+        <nav className="bg-[#EAF4F1]-100 border-b border-[#B6D1C7] shadow-lg">
+            <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
 
-  return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="h-16 flex items-center justify-between gap-6">
+                {/* Title */}
+                <h1 className="text-xl font-semibold text-[#335F5F]"> Product Management </h1>
 
-          {/* LOGO */}
-          <NavLink to="/Shopping-Cart/" className="flex items-center">
-            <img src={`${import.meta.env.BASE_URL}/logo.png`} alt="Logo" className="h-10" />
-          </NavLink>
+                {/* Search */}
+                <div className="relative w-full md:w-96">
+                    <FaSearch className="absolute left-3 top-3 text-[#5F8F82] text-sm" />
+                    <input
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Search products..."
+                        className="
+                            w-full pl-9 pr-3 py-2.5 rounded-full
+                            border border-[#B6D1C7] bg-white
+                            focus:outline-none focus:ring-2 focus:ring-[#5F8F82]
+                            text-sm
+                        "
+                    />
+                </div>
 
-          {/* SEARCH BAR */}
-          <div className="flex flex-1 max-w-xl items-center bg-gray-100 px-3 py-2 rounded-full">
-            <FaSearch className="text-gray-400 mr-2" />
-            <input
-              type="text"
-              placeholder="Search products..."
-              onChange={handleSearch}
-              className="bg-transparent outline-none w-full"
-            />
-          </div>
+                {/* Actions */}
+                <div className="flex gap-3">
+                    {/* Toggle View */}
+                    <button
+                        onClick={() => setView(view === 'table' ? 'card' : 'table')}
+                        className="
+                            flex items-center gap-2
+                            px-4 py-2 rounded-full text-sm font-medium
+                            border border-[#B6D1C7] bg-white
+                            text-[#335F5F]
+                            hover:bg-[#B6D1C7]/40
+                            transition
+                        "
+                    >
+                        {view === "table" ? <FaThLarge /> : <FaList />}
+                        {view === "table" ? "Card" : "Table"}
+                    </button>
 
-          {/* ACTIONS */}
-          <div className="flex items-center gap-6">
-            <NavLink to="/Shopping-Cart/" className="font-medium">
-              Home
-            </NavLink>
-
-            <NavLink to="/Shopping-Cart/cart" className="relative">
-              <FaShoppingCart className="text-xl" />
-              {cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs h-5 w-5 rounded-full flex items-center justify-center">
-                  {cartItems.length}
-                </span>
-              )}
-            </NavLink>
-          </div>
-
-        </div>
-      </div>
-    </header>
-  );
+                    {/* Add Product */}
+                    <button
+                        onClick={() => navigate("/Product Management/add-product")}
+                        className="
+                            flex items-center gap-2
+                            px-5 py-2 rounded-full text-sm font-medium
+                            bg-[#335F5F] text-white
+                            hover:bg-[#5F8F82]
+                            transition-all
+                            shadow-sm hover:shadow-md
+                        "
+                    >
+                        <FaPlus />
+                        Add Product
+                    </button>
+                </div>
+            </div>
+        </nav>
+    );
 };
+
+export default Navbar;

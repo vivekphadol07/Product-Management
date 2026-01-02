@@ -1,32 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Navbar } from "./components/Navbar";
-import { Route, Routes } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { Cart } from "./pages/Cart";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import AddProduct from "./pages/AddProduct";
+import EditProduct from "./pages/EditProduct";
+import { ProductProvider } from "./context/ProductContext";
 
-export const App = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedQuery(searchQuery);
-    }, 500); 
-
-    return () => clearTimeout(timer);
-  }, [searchQuery]);
+const App = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      
-      {/* Navbar */}
-      <Navbar setSearchQuery={setSearchQuery}/>
-
-      {/* Pages */}
-      <Routes>
-        <Route path="/Shopping-Cart/" element={<Home searchQuery={debouncedQuery}/>} />
-        <Route path="/Shopping-Cart/cart" element={<Cart />} />
-      </Routes>
-
-    </div>
+    <ProductProvider>
+      <div className="min-h-screen bg-background">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/Product Management/" element={<Home />} />
+            <Route path="/Product Management/add-product" element={<AddProduct />} />
+            <Route path="/Product Management/edit-product/:id" element={<EditProduct />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </ProductProvider>
   );
 };
+
+export default App;
