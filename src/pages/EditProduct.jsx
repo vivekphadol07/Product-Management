@@ -20,7 +20,7 @@ const EditProduct = () => {
 
   const saveProduct = (updatedProduct) => {
     addOrUpdateProduct(updatedProduct);
-    navigate("/product-management/");
+    navigate("/");
   };
 
   return (
@@ -28,7 +28,7 @@ const EditProduct = () => {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Back Button */}
         <button
-          onClick={() => navigate("/product-management/")}
+          onClick={() => navigate("/")}
           className="
             mb-6 inline-flex items-center gap-2
             text-sm font-medium

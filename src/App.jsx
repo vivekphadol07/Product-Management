@@ -10,9 +10,9 @@ const App = () => {
       <div className="min-h-screen bg-background">
         <BrowserRouter>
           <Routes>
-            <Route path="/product-management/" element={<Home />} />
-            <Route path="/product-management/add-product" element={<AddProduct />} />
-            <Route path="/product-management/edit-product/:id" element={<EditProduct />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/edit-product/:id" element={<EditProduct />} />
           </Routes>
         </BrowserRouter>
       </div>

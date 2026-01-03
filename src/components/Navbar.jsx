@@ -50,7 +50,7 @@ const Navbar = ({ view, setView, search, setSearch }) => {
 
           {/* Add Product */}
           <button
-            onClick={() => navigate("/product-management/add-product")}
+            onClick={() => navigate("/add-product")}
             className="
               flex items-center gap-2
               px-5 py-2 rounded-full text-sm font-medium

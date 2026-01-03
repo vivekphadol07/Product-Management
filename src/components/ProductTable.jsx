@@ -53,7 +53,7 @@ const ProductTable = ({ products }) => {
               <td className="px-4 py-3 text-center">
                 <button
                   onClick={() =>
-                    navigate(`/product-management/edit-product/${p.id}`)
+                    navigate(`/edit-product/${p.id}`)
                   }
                   className="
                     px-4 py-1.5 text-sm rounded-full
